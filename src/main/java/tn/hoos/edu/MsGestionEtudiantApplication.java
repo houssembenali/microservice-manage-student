@@ -30,6 +30,13 @@ public class MsGestionEtudiantApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		//Expose ID because ID is default hided in rest 
 		repositoryRestConfiguration.exposeIdsFor(Training.class,Student.class);
+		repositoryRestConfiguration.getCorsRegistry()
+		.addMapping("/**")
+		.allowedOrigins("http://localhost:4200")
+		.allowedHeaders("*")
+		.allowedMethods("OPTIONS","HEAD","GET","PUT","POST","DELETE","PATCH");
+		//we can implement configuration in the class 'GlobalRepositoryRestConfigurer' this class is commentend now
+		
 		
 		Training training = trainingRepository.save(new Training(null, "Android", 10, null));
 		Training training2 = trainingRepository.save(new Training(null, "JAVA", 40, null));
